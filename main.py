@@ -8,7 +8,7 @@ if __name__ == "__main__":
     
     result = app.invoke(
         input={
-            "question": "What is prompt engineering?"
+            "question": "Tell me something related to Santo Domingo"
     })["generation"]
     
     print("\n****\n")

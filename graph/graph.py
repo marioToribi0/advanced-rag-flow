@@ -6,6 +6,7 @@ from graph.state import GraphState
 from graph.nodes import retrieve, grade_documents, web_search, generate
 from graph.chains.hallucination_grader import hallucination_grader, GradeHallucinations
 from graph.chains.answer_grader import answer_grader, GradeAnswer
+from graph.chains.router import RouteQuery, question_router
 
 load_dotenv()
 
@@ -15,6 +16,16 @@ flow.add_node(RETRIEVE, retrieve)
 flow.add_node(GRADE_DOCUMENTS, grade_documents)
 flow.add_node(WEBSEARCH, web_search)
 flow.add_node(GENERATE, generate)
+
+def route_question(state: GraphState) -> str:
+    print("---ROUTE QUESTION---")
+    question = state["question"]
+    source: RouteQuery = question_router.invoke({"question": question})
+    if source.datasource == WEBSEARCH:
+        print("---ROUTE QUESTION TO WEB SEARCH---")
+        return WEBSEARCH
+    print("---ROUTE QUESTION TO VECTORSTORE---")
+    return RETRIEVE
 
 def is_web_search_neccesary(state: GraphState):
     if (state["web_search"]==True):
@@ -42,13 +53,8 @@ def grade_generation_grounded_in_documents_and_question(state: GraphState) -> st
             return "not useful"
     else:
         return "not supported"
-        
-        
-        
 
-    
-
-flow.set_entry_point(RETRIEVE)
+flow.set_conditional_entry_point(route_question, {RETRIEVE: RETRIEVE, WEBSEARCH:WEBSEARCH})
 flow.add_edge(RETRIEVE, GRADE_DOCUMENTS)
 flow.add_conditional_edges(GRADE_DOCUMENTS, is_web_search_neccesary, [WEBSEARCH, GENERATE])
 flow.add_edge(WEBSEARCH, GENERATE)

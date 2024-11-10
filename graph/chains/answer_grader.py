@@ -2,25 +2,17 @@ from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from typing import Literal
 from langchain_core.runnables import RunnableSequence
-from langchain_ollama import ChatOllama
-from langchain_openai import ChatOpenAI
-from config import BASE_URL_OLLAMA
-
-llm = ChatOpenAI(temperature=0)
-# llm = ChatOllama(
-#     model="llama3.1",
-#     base_url=BASE_URL_OLLAMA
-# )
+from llm_models import llm
 
 class GradeAnswer(BaseModel):
 
     binary_score: Literal['yes', 'no'] = Field(
-        description="Answer addresses the question, 'yes' or 'no'"
+        description="Answer addresses or resolves the question, 'yes' or 'no'"
     )
    
 structured_llm_grader = llm.with_structured_output(GradeAnswer)
     
-system = """You are a grader assessing whether an answer addresses / resolves a question \n
+system = """You are a grader assessing whether an answer addresses or resolves a question \n
     Give a binary score 'yes' or 'no'. 'yes' means that the answer resolves the question.
 """
 
@@ -31,4 +23,4 @@ answer_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-answer_grader: RunnableSequence = answer_prompt | structured_llm_grader
+answer_grader = answer_prompt | structured_llm_grader
