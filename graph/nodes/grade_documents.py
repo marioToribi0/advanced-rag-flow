@@ -31,7 +31,7 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
         else:
             relevant_documents.append(document)
             
-    return {"question": question, "documents": relevant_documents, "websearch": websearch}
+    return {"question": question, "documents": relevant_documents, "web_search": websearch}
     
     
     
