@@ -5,7 +5,7 @@ from graph.state import GraphState
 
 def grade_documents(state: GraphState) -> Dict[str, Any]:
     """
-    Determines wheter the retrieved documents are relevant to the question
+    Determines whether the retrieved documents are relevant to the question
     If any document is not relevant, we will set a flag to run web search
     
     Args:
