@@ -1,6 +1,3 @@
-import sys
-sys.path.append("./")
-
 from langchain_community.tools import TavilySearchResults
 from graph.state import GraphState
 from typing import Any, Dict

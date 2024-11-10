@@ -41,8 +41,8 @@ retriever = Chroma(
     persist_directory="./.chroma"
 ).as_retriever()
 
-# Retrieve the most similar text
-retrieved_documents = retriever.invoke("What is prompt engineering?")
+# # Retrieve the most similar text
+# retrieved_documents = retriever.invoke("What is prompt engineering?")
 
-# show the retrieved document's content
-print([doc.page_content for doc in retrieved_documents[:3]])
+# # show the retrieved document's content
+# print([doc.page_content for doc in retrieved_documents[:3]])
