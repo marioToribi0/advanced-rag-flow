@@ -2,5 +2,7 @@ from graph.state import GraphState
 from ingestion import retriever
 
 def retrive(state: GraphState):
-    documents = retriever.invoke(state["question"])
-    return {"documents": documents}
+    print("--RETRIEVE--")
+    question = state["question"]
+    documents = retriever.invoke(question)
+    return {"documents": documents, "question": question}
