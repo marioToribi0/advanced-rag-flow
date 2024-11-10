@@ -62,7 +62,7 @@ $ poetry install
 $ poetry shell
 
 # Run the project
-$ python agents/<MODEL>/main.py
+$ python agents/main.py
 ```
 
 ## :memo: License ##
