@@ -3,13 +3,14 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from langchain_core.runnables import RunnableSequence
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from config import BASE_URL_OLLAMA
 
-# llm = ChatOpenAI(temperature=0)
-llm = ChatOllama(
-    model="llama3.1",
-    base_url=BASE_URL_OLLAMA
-)
+llm = ChatOpenAI(temperature=0)
+# llm = ChatOllama(
+#     model="llama3.1",
+#     base_url=BASE_URL_OLLAMA
+# )
 
 class GradeAnswer(BaseModel):
 
@@ -26,7 +27,7 @@ system = """You are a grader assessing whether an answer addresses / resolves a 
 answer_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),
-        ("human", "User question: \n\n {question} \n\n LLM generation: {answer}"),
+        ("human", "User question: \n\n {question} \n\n LLM generation: {generation}"),
     ]
 )
 

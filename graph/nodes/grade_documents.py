@@ -27,8 +27,10 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
         )
         
         if is_relevant.binary_score=="no":
+            print("---DOCUMENT NOT RELEVANT---")
             websearch = True
         else:
+            print("---DOCUMENT RELEVANT---")
             relevant_documents.append(document)
             
     return {"question": question, "documents": relevant_documents, "web_search": websearch}

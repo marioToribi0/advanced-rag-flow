@@ -4,13 +4,14 @@ from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
 from langchain.output_parsers import PydanticOutputParser
 from typing import Literal
+from langchain_openai import ChatOpenAI
 from config import BASE_URL_OLLAMA
 
-# llm = ChatOpenAI(temperature=0)
-llm = ChatOllama(
-    model="llama3.1",
-    base_url=BASE_URL_OLLAMA
-)
+llm = ChatOpenAI(temperature=0)
+# llm = ChatOllama(
+#     model="llama3.1",
+#     base_url=BASE_URL_OLLAMA
+# )
 
 class GradeDocuments(BaseModel):
     """Binary score for relevance check on retrieved documents"""

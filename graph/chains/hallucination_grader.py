@@ -3,13 +3,14 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from langchain_core.runnables import RunnableSequence
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from config import BASE_URL_OLLAMA
 
-# llm = ChatOpenAI(temperature=0)
-llm = ChatOllama(
-    model="llama3.1",
-    base_url=BASE_URL_OLLAMA
-)
+llm = ChatOpenAI(temperature=0)
+# llm = ChatOllama(
+#     model="llama3.1",
+#     base_url=BASE_URL_OLLAMA
+# )
 
 class GradeHallucinations(BaseModel):
     """Binary score for hallucination present in generation answer."""
