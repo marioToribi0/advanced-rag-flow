@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from graph.chains.nodes.retrieval_grader import GradeDocuments, retrieval_grader
+from graph.chains.retrieval_grader import GradeDocuments, retrieval_grader
 from ingestion import retriever
 
 def test_retrival_grader_answer_yes() -> None:
